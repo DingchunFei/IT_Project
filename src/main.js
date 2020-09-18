@@ -10,6 +10,16 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+import axios from 'axios'
+axios.defaults.baseURL="/api";
+Vue.prototype.$http = axios
+
+
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
 Vue.config.productionTip = false
 
 new Vue({
