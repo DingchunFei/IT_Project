@@ -27,7 +27,7 @@
                         </el-form-item>
                     </el-form>
                     <!--Register validation messeage -->
-                    <div><p class="error-content">{{ValidateMessage}}</p></div>
+                    <div><p class="error-content">{{Message}}</p></div>
                 </v-card-text>
             </v-card>
         </div>
@@ -56,7 +56,7 @@
             .then((response)=>{
                 console.log(response);
                 if(response.data.code === 0){
-                    this.ValidateMessage = 'The validate email has been sent, please go and confirm the validation!';
+                    this.Message = 'The validate email has been sent, please go and confirm the validation!';
                 }
 
             })
@@ -75,7 +75,7 @@
                     RetypePassword:'',
                     firstName:'',
                     lastName:'',
-                    ValidateMessage:'',
+                    Message:'',
                 },
                 rule: {
                     UserEmail: [
@@ -97,5 +97,22 @@
 </script>
 
 <style scoped>
-
+    .mx-auto{
+        background: rgba(242, 242, 242, 1);
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        text-align: center;
+        position: absolute;
+        left: 383px;
+        top: 43px;
+        width: 356px;
+        height: 683px;
+        display: flex;
+    }
+    h1{
+        color: #015478;
+    }
+    .error-content{
+        margin-top: 4px;
+        color: crimson;
+    }
 </style>

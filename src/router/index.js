@@ -7,27 +7,32 @@ const routes = [
     {
         path: '/',
         name: 'Login',
-        component: () => import('../components/Login.vue')
+        component: () => import('../views/Login.vue')
     },
     {
         path: '/Home',
         name: 'Home',
-        component: () => import('../components/Home.vue')
+        component: () => import('../views/Home.vue')
     },
     {
         path: '/Register',
         name: 'Register',
-        component: () => import('../components/Register.vue')
+        component: () => import('../views/Register.vue')
     },
     {
         path: '/validate',
         name: 'validate',
-        component: () => import('../components/validate.vue')
+        component: () => import('../views/validate.vue')
     },
     {
         path: '/Add',
         name: 'Add',
         component: () => import('../views/Add.vue')
+    },
+    {
+        path: '/Editor',
+        name: 'Editor',
+        component: () => import('../views/TextEditor.vue')
     },
 ]
 

@@ -59,6 +59,7 @@
             });
 
     }
+
     export default {
         name: "Login",
         data() {
@@ -90,6 +91,7 @@
         methods:{
             onsubmit
         }
+
     }
 </script>
 
@@ -112,4 +114,5 @@
         margin-top: 4px;
         color: crimson;
     }
+
 </style>
