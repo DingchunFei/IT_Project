@@ -39,7 +39,7 @@
         //console.log(password)
 
         return axios
-           .post(
+            .post(
                 '/login',{email: vm.formData.email, password: password },{
                     headers:{
 
@@ -59,7 +59,6 @@
             });
 
     }
-
     export default {
         name: "Login",
         data() {
@@ -73,7 +72,7 @@
                 rule: {
                     UserEmail: [
                         //{ required: true, message: 'Please input your email.', trigger: 'blur' },
-                       /** {
+                        /** {
                             required: true,
                             pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
                             message: 'Name does not support special characters.',
@@ -91,7 +90,6 @@
         methods:{
             onsubmit
         }
-
     }
 </script>
 
@@ -114,5 +112,4 @@
         margin-top: 4px;
         color: crimson;
     }
-
 </style>

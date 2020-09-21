@@ -27,7 +27,7 @@
                         </el-form-item>
                     </el-form>
                     <!--Register validation messeage -->
-                    <div><p class="error-content">{{ValidateMessage}}</p></div>
+                    <div><p class="error-content">{{Message}}</p></div>
                 </v-card-text>
             </v-card>
         </div>
@@ -56,7 +56,7 @@
             .then((response)=>{
                 console.log(response);
                 if(response.data.code === 0){
-                    this.ValidateMessage = 'The validate email has been sent, please go and confirm the validation!';
+                    this.Message = 'The validate email has been sent, please go and confirm the validation!';
                 }
 
             })
@@ -75,27 +75,17 @@
                     RetypePassword:'',
                     firstName:'',
                     lastName:'',
-                    ValidateMessage:'',
+                    Message:'',
                 },
                 rule: {
                     UserEmail: [
                         //{ required: true, message: 'Please input your email.', trigger: 'blur' },
-                        {
-                            required: true,
-                            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,
-                            message: 'Name does not support special characters.',
-                            trigger: 'blur'
-                        }
+                        //{required: true, pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/, message: 'Name does not support special characters.', trigger: 'blur'}
                     ],
                     Password: [
-                        { required: true, message: 'Please enter your password.', trigger: 'blur' },
-                        { min: 15, max: 18, message: 'Please fill in the 18-digit number truthfully for the school security department to check.', trigger: 'blur' },
-                        {
-                            required: true,
-                            pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
-                            message: 'Please enter the correct ID number.',
-                            trigger: 'blur'
-                        }
+                        //{ required: true, message: 'Please enter your password.', trigger: 'blur' },
+                        //{ min: 15, max: 18, message: 'Please fill in the 18-digit number truthfully for the school security department to check.', trigger: 'blur' },
+                        //{required: true, pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: 'Please enter the correct ID number.', trigger: 'blur'}
                     ]
                 }
             };

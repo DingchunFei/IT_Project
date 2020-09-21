@@ -24,6 +24,11 @@ const routes = [
         name: 'validate',
         component: () => import('../components/validate.vue')
     },
+    {
+        path: '/Add',
+        name: 'Add',
+        component: () => import('../views/Add.vue')
+    },
 ]
 
 const router = new VueRouter({
