@@ -30,9 +30,14 @@ const routes = [
         component: () => import('../views/Add.vue')
     },
     {
-        path: '/Editor',
-        name: 'Editor',
-        component: () => import('../views/TextEditor.vue')
+        path: '/AboutMe',
+        name: 'AboutMe',
+        component: () => import('../components/AboutMe.vue')
+    },
+    {
+        path: '/AboutMeEditor',
+        name: 'AboutMeEditor',
+        component: () => import('../views/AboutMeEditor.vue')
     },
 ]
 
