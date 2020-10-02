@@ -56,7 +56,7 @@
             .then((response)=>{
                 console.log(response);
                 if(response.data.code === 0){
-                    this.Message = 'The validate email has been sent, please go and confirm the validation!';
+                    vm.Message = 'The validate email has been sent, please go and confirm the validation!';
                 }
 
             })
