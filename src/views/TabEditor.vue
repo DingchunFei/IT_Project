@@ -3,6 +3,8 @@
     <Editor
         ref="contentEditor"
     />
+    <el-button type="primary" @click="submitForm()">Submit</el-button>
+    <el-button @click="goHome()">Cancel</el-button>
   </div>
 </template>
 
@@ -43,6 +45,25 @@
         // console.log(form)
       })
     },
+    methods: {
+      submitForm() {
+        // console.log(this.$refs.detailsEditor.content)
+        const _this = this
+        //数据源
+        const editor = this.$refs.contentEditor
+        //获取数据
+        _this.content = editor.content
+        console.log("send:" + JSON.stringify(_this.content))
+
+        return axios.post('/tab/' + _this.tabId, {title: _this.title, content: _this.content}).then(res => {
+          console.log(res)
+          this.goHome()
+        })
+      },
+      goHome() {
+        this.$router.push("/Home");
+      },
+    }
   }
 </script>
 
