@@ -23,7 +23,7 @@
                 <el-row :gutter="20">
                   <el-col :span="16">
                     <div>
-                      {{tabContent.firstName}} {{tabContent.lastName}}
+                      <h1>{{tabContent.firstName}} {{tabContent.lastName}}</h1>
                     </div>
                   </el-col>
                 </el-row>
@@ -113,6 +113,7 @@
           console.log(this.tabContent)
         })
       },
+      //进入修改页面
       updateTab(){
         const _this = this
         this.$router.push({

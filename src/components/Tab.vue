@@ -37,12 +37,19 @@
         console.log(id)
         return axios.get('/tab/'+id).then(res => {
           const data = res.data.data
-          const json = JSON.parse(data.content)
-          this.tabContent = json.details
+          this.tabContent = data.content
           console.log(data)
         })
       },
+      //进入修改页面
       updateTab(){
+        const _this = this
+        this.$router.push({
+          name: 'TabEditor',
+          params: {
+            tabId: _this.tabId
+          }
+        })
         console.log("update this tab")
       },
     }

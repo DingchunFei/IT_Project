@@ -39,6 +39,11 @@ const routes = [
         name: 'AboutMeEditor',
         component: () => import('../views/AboutMeEditor.vue')
     },
+    {
+        path: '/TabEditor',
+        name: 'TabEditor',
+        component: () => import('../views/TabEditor.vue')
+    },
 ]
 
 const router = new VueRouter({
