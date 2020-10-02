@@ -106,11 +106,13 @@
       readTabContent(){
         const id = this.tabId
         console.log(id)
-        return axios.get('/tab/'+id).then(res => {
+        //没缓存再发送请求
+
+        axios.get('/tab/'+id).then(res => {
           const data = res.data.data
           console.log(data)
           this.tabContent = JSON.parse(data.content)
-          console.log(this.tabContent)
+          sessionStorage.setItem("tab"+id, JSON.stringify(data))
         })
       },
       //进入修改页面

@@ -103,8 +103,12 @@
           <el-footer>
             <el-col >
               <el-form-item >
-                <el-button type="primary" @click="submitForm()">Submit</el-button>
-                <el-button @click="goHome()">Cancel</el-button>
+                <el-row type="flex" class="row-bg" justify="space-around">
+                  <el-button-group>
+                    <el-button type="primary" @click="submitForm()">Submit</el-button>
+                    <el-button @click="goHome()">Cancel</el-button>
+                  </el-button-group>
+                </el-row>
               </el-form-item>
             </el-col>
           </el-footer>

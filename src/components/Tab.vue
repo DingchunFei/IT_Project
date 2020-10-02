@@ -35,11 +35,14 @@
       readTabContent(){
         const id = this.tabId
         console.log(id)
-        return axios.get('/tab/'+id).then(res => {
+
+        axios.get('/tab/'+id).then(res => {
           const data = res.data.data
           this.tabContent = data.content
+          sessionStorage.setItem("tab"+id, data)
           console.log(data)
         })
+
       },
       //进入修改页面
       updateTab(){

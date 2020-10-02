@@ -1,10 +1,16 @@
 <template>
   <div>
-    <Editor
-        ref="contentEditor"
-    />
-    <el-button type="primary" @click="submitForm()">Submit</el-button>
-    <el-button @click="goHome()">Cancel</el-button>
+    <el-card>
+      <Editor
+          ref="contentEditor"
+      />
+      <el-row type="flex" class="row-bg" justify="space-around">
+        <el-button-group>
+          <el-button type="primary" @click="submitForm()">Submit</el-button>
+          <el-button @click="goHome()">Cancel</el-button>
+        </el-button-group>
+      </el-row>
+    </el-card>
   </div>
 </template>
 
