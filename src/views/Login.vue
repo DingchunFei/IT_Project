@@ -48,7 +48,7 @@
             .then((response)=>{
                 console.log(response);
                 if(response.data.code === 0){
-                    vm.$router.push("/AboutMeEditor");
+                    vm.$router.push("/Home");
                 }else {
                     this.errored = true;
                     this.ErrorMessage = "This is an invalid E-mail or password! please register first";

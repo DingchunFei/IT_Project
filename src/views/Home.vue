@@ -69,7 +69,7 @@
             // createTab(data){
             //     this.tabContents.push(data)
             // }
-            
+
         }
     }
 </script>
