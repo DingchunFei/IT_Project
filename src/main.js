@@ -14,7 +14,8 @@ import axios from 'axios'
 axios.defaults.baseURL="/api";
 Vue.prototype.$http = axios
 
-
+import utils from "@/common/utils";
+Vue.use(utils)
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
