@@ -1,4 +1,4 @@
-# e-profile
+# e-portfolio
 
 ## Project setup
 ```
