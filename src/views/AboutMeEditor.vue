@@ -123,6 +123,7 @@
 <script>
   import axios from "axios";
   import Editor from '@/components/TextEditor'
+  import utils from "../common/utils";
   export default {
     name: 'AboutMeEditor',
     components: {
@@ -166,31 +167,53 @@
     },
     created() {
       this.tabId = this.$route.params.tabId
-      const _this = this
-      //加载更新前的数据
-      return axios.get('/tab/'+_this.tabId).then(res => {
-        console.log(res)
-        const content = JSON.parse(res.data.data.content);
-        console.log(content)
-        //取得数据源
-        const form = this.content
-        const editor = this.$refs.detailsEditor
+      utils.readAboutMeContent(this.tabId).then(res => {
+          const content = JSON.parse(res.content);
+          console.log(content)
+          //取得数据源
+          const form = this.content
+          const editor = this.$refs.detailsEditor
 
-        //页面填值
-        this.title = res.data.data.title
-        //名字
-        form.firstName = content.firstName
-        form.lastName = content.lastName
-        form.links = content.links
-        //邮箱
-        form.email = content.email
-        //文件url
-        form.attachment = content.attachment
-        //编辑器内容
-        form.details = content.details
-        editor.content = content.details
-        // console.log(form)
+          //页面填值
+          this.title = res.title
+          //名字
+          form.firstName = content.firstName
+          form.lastName = content.lastName
+          form.links = content.links
+          //邮箱
+          form.email = content.email
+          //文件url
+          form.attachment = content.attachment
+          //编辑器内容
+          form.details = content.details
+          editor.content = content.details
+          // console.log(form)
       })
+      // const _this = this
+      // //加载更新前的数据
+      // return axios.get('/tab/'+_this.tabId).then(res => {
+      //   console.log(res)
+      //   const content = JSON.parse(res.data.data.content);
+      //   console.log(content)
+      //   //取得数据源
+      //   const form = this.content
+      //   const editor = this.$refs.detailsEditor
+      //
+      //   //页面填值
+      //   this.title = res.data.data.title
+      //   //名字
+      //   form.firstName = content.firstName
+      //   form.lastName = content.lastName
+      //   form.links = content.links
+      //   //邮箱
+      //   form.email = content.email
+      //   //文件url
+      //   form.attachment = content.attachment
+      //   //编辑器内容
+      //   form.details = content.details
+      //   editor.content = content.details
+      //   // console.log(form)
+      // })
     },
     methods: {
       submitForm(){
@@ -205,6 +228,7 @@
 
         return axios.post('/tab/'+_this.tabId, {title: _this.title, content: JSON.stringify(_this.content)}).then(res => {
           console.log(res)
+          sessionStorage.removeItem("tab"+_this.tabId)
           this.goHome()
         })
       },

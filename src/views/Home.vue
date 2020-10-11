@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-<<<<<<< HEAD
+<!--<<<<<<< HEAD
             <div class="menu">
                 <el-menu
                         class="el-menu-demo"
@@ -43,10 +43,10 @@
                 </el-row>
                 
 
-            </div>
+            </div> -->
 
             <!--Add Tab Form -->
-            <el-dialog title="Add Tabs" :visible.sync="dialogFormVisible">
+          <!--  <el-dialog title="Add Tabs" :visible.sync="dialogFormVisible">
                 <el-form :model="form">
                     <el-form-item label="Title" :label-width="formLabelWidth">
                         <el-input v-model="form.title" autocomplete="off"></el-input>
@@ -62,7 +62,7 @@
             </el-dialog>
 
         </div>
-=======
+======= -->
             <el-menu
                 class="el-menu-demo"
                 mode="horizontal"
@@ -80,12 +80,12 @@
                 <Tab v-else :tabId="tab.tab_id.toString()" :tabTitle="tab.title"/>
             </el-tab-pane>
         </el-tabs>
->>>>>>> 2ae4ce4304143c3330fc886593876a1b2c4a1c10
+
     </div>
 </template>
 
 <script>
-<<<<<<< HEAD
+/**<<<<<<< HEAD
     import axios from 'axios';
     function getTabs() {
         let vm = this;
@@ -165,7 +165,7 @@
         },
         created() {
             this.getTabs();
-=======
+=======**/
     import axios from "axios";
     import Tab from "../components/Tab"
     import AboutMe from "../components/AboutMe";
@@ -213,7 +213,7 @@
             // createTab(data){
             //     this.tabContents.push(data)
             // }
->>>>>>> 2ae4ce4304143c3330fc886593876a1b2c4a1c10
+
 
         }
     }

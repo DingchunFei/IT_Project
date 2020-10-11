@@ -86,7 +86,8 @@
 </template>
 
 <script>
-  import axios from "axios";
+  // import axios from "axios";
+  import utils from "../common/utils";
   export default {
     name: "AboutMe",
     props : {
@@ -107,13 +108,15 @@
         const id = this.tabId
         console.log(id)
         //没缓存再发送请求
-
-        axios.get('/tab/'+id).then(res => {
-          const data = res.data.data
-          console.log(data)
-          this.tabContent = JSON.parse(data.content)
-          sessionStorage.setItem("tab"+id, JSON.stringify(data))
+        utils.readAboutMeContent(id).then(res => {
+            this.tabContent = JSON.parse(res.content)
         })
+        // axios.get('/tab/'+id).then(res => {
+        //   const data = res.data.data
+        //   console.log(data)
+        //   this.tabContent = JSON.parse(data.content)
+        //   sessionStorage.setItem("tab"+id, JSON.stringify(data))
+        // })
       },
       //进入修改页面
       updateTab(){

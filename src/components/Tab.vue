@@ -15,7 +15,8 @@
 </template>
 
 <script>
-  import axios from "axios";
+  // import axios from "axios";
+  import utils from "../common/utils";
   export default {
     name: "Tab",
     props : {
@@ -34,15 +35,18 @@
       //通过tab id获取tab内容
       readTabContent(){
         const id = this.tabId
-        console.log(id)
-
-        axios.get('/tab/'+id).then(res => {
-          const data = res.data.data
-          this.tabContent = data.content
-          sessionStorage.setItem("tab"+id, data)
+        //使用公用方法
+        utils.readTabContent(id).then(res => {
+          const data = res
           console.log(data)
+          this.tabContent = data.content
         })
-
+        // axios.get('/tab/'+id).then(res => {
+        //   const data = res.data.data
+        //   this.tabContent = data.content
+        //   sessionStorage.setItem("tab"+id, data)
+        //   console.log(data)
+        // })
       },
       //进入修改页面
       updateTab(){
