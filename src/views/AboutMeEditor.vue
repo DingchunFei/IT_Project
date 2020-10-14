@@ -3,118 +3,118 @@
     <div class="edit">
       <h1>Update your {{title}} information</h1>
       <el-card class="richText">
-      <el-form :rules="rules"
-               ref="AboutMeForm">
-<!--              :label-position="labelPosition"-->
-<!--              label-width="80px"-->
-<!--              :model="customer"-->
-<!--              :rules="rules"-->
-<!--              ref="ruleForm">-->
-        <el-container style="height: 100%">
-          <el-main>
-          <el-row :gutter="20">
+        <el-form :rules="rules"
+                 ref="AboutMeForm">
+          <!--              :label-position="labelPosition"-->
+          <!--              label-width="80px"-->
+          <!--              :model="customer"-->
+          <!--              :rules="rules"-->
+          <!--              ref="ruleForm">-->
+          <el-container style="height: 100%">
+            <el-main>
+              <el-row :gutter="20">
 
-            <el-col :span="5">
-              <div>
-<!--                <el-avatar-->
-<!--                        icon="el-icon-user-solid"-->
-<!--                        :size="200"-->
-<!--                        shape="square"-->
-<!--                        fit="fill"-->
-<!--                        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"-->
-<!--                ></el-avatar>-->
-              </div>
-<!--      头像上传        -->
-<!--              <el-upload-->
-<!--                      class="upload-demo"-->
-<!--                      action="https://jsonplaceholder.typicode.com/posts/"-->
-<!--                      :on-preview="handlePreview"-->
-<!--                      :on-remove="handleRemove"-->
-<!--                      :before-remove="beforeRemove"-->
-<!--                      multiple-->
-<!--                      :limit="3"-->
-<!--                      :on-exceed="handleExceed"-->
-<!--                      :file-list="fileList">-->
-<!--                <el-button size="small" type="primary">Upload your avatar</el-button>-->
-<!--                <div slot="tip" class="el-upload__tip">Only jpg/png files without exceeding 500kb are available</div>-->
-<!--              </el-upload>-->
-              <div class="el-upload">
-                <el-upload
+                <el-col :span="5">
+                  <div>
+                    <!--                <el-avatar-->
+                    <!--                        icon="el-icon-user-solid"-->
+                    <!--                        :size="200"-->
+                    <!--                        shape="square"-->
+                    <!--                        fit="fill"-->
+                    <!--                        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"-->
+                    <!--                ></el-avatar>-->
+                  </div>
+                  <!--      头像上传        -->
+                  <!--              <el-upload-->
+                  <!--                      class="upload-demo"-->
+                  <!--                      action="https://jsonplaceholder.typicode.com/posts/"-->
+                  <!--                      :on-preview="handlePreview"-->
+                  <!--                      :on-remove="handleRemove"-->
+                  <!--                      :before-remove="beforeRemove"-->
+                  <!--                      multiple-->
+                  <!--                      :limit="3"-->
+                  <!--                      :on-exceed="handleExceed"-->
+                  <!--                      :file-list="fileList">-->
+                  <!--                <el-button size="small" type="primary">Upload your avatar</el-button>-->
+                  <!--                <div slot="tip" class="el-upload__tip">Only jpg/png files without exceeding 500kb are available</div>-->
+                  <!--              </el-upload>-->
+                  <div class="el-upload">
+                    <el-upload
                         class="avatar-uploader"
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        action=""
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess"
                         :before-upload="beforeAvatarUpload">
-                  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon" >
-                  </i>
-                </el-upload>
-              </div>
-            </el-col>
-
-            <el-col :span="16">
-              <el-row :gutter="20">
-                <el-col :span="8">
-                  <el-form-item label="First Name" prop="name">
-                    <el-input v-model="content.firstName"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="Last Name" prop="name">
-                    <el-input v-model="content.lastName"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row>
-                  <div>
-                    <Editor
-                            v-model="content.details"
-                            ref="detailsEditor"
-                    />
+                      <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                      <i v-else class="el-icon-plus avatar-uploader-icon" >
+                      </i>
+                    </el-upload>
                   </div>
-              </el-row>
-            </el-col>
+                </el-col>
 
-            <el-col :span="3" :gutter="20">
-              <el-row>
-                <el-form-item label="GitHub" prop="links">
-                  <el-input v-model="content.links.github"></el-input>
-                </el-form-item>
-              </el-row>
-              <el-row>
-                <el-form-item label="LinkedIn" prop="links">
-                  <el-input v-model="content.links.linkedin"></el-input>
-                </el-form-item>
-              </el-row>
-              <el-row>
-                <el-form-item label="Contact" prop="email">
-                  <el-input v-model="content.email"></el-input>
-                </el-form-item>
-              </el-row>
-              <el-row>
-                <el-form-item label="Attachment" prop="attachment">
-                  <el-input v-model="content.attachment"></el-input>
-                </el-form-item>
-              </el-row>
-            </el-col>
-          </el-row>
-          </el-main>
+                <el-col :span="16">
+                  <el-row :gutter="20">
+                    <el-col :span="8">
+                      <el-form-item label="First Name" prop="name">
+                        <el-input v-model="content.firstName"></el-input>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="8">
+                      <el-form-item label="Last Name" prop="name">
+                        <el-input v-model="content.lastName"></el-input>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                  <el-row>
+                    <div>
+                      <Editor
+                          v-model="content.details"
+                          ref="detailsEditor"
+                      />
+                    </div>
+                  </el-row>
+                </el-col>
 
-          <el-footer>
-            <el-col >
-              <el-form-item >
-                <el-row type="flex" class="row-bg" justify="space-around">
-                  <el-button-group>
-                    <el-button type="primary" @click="submitForm()">Submit</el-button>
-                    <el-button @click="goHome()">Cancel</el-button>
-                  </el-button-group>
-                </el-row>
-              </el-form-item>
-            </el-col>
-          </el-footer>
+                <el-col :span="3" :gutter="20">
+                  <el-row>
+                    <el-form-item label="GitHub" prop="links">
+                      <el-input v-model="content.links.github"></el-input>
+                    </el-form-item>
+                  </el-row>
+                  <el-row>
+                    <el-form-item label="LinkedIn" prop="links">
+                      <el-input v-model="content.links.linkedin"></el-input>
+                    </el-form-item>
+                  </el-row>
+                  <el-row>
+                    <el-form-item label="Contact" prop="email">
+                      <el-input v-model="content.email"></el-input>
+                    </el-form-item>
+                  </el-row>
+                  <el-row>
+                    <el-form-item label="Attachment" prop="attachment">
+                      <el-input v-model="content.attachment"></el-input>
+                    </el-form-item>
+                  </el-row>
+                </el-col>
+              </el-row>
+            </el-main>
 
-        </el-container>
-      </el-form>
+            <el-footer>
+              <el-col >
+                <el-form-item >
+                  <el-row type="flex" class="row-bg" justify="space-around">
+                    <el-button-group>
+                      <el-button type="primary" @click="submitForm()">Submit</el-button>
+                      <el-button @click="goHome()">Cancel</el-button>
+                    </el-button-group>
+                  </el-row>
+                </el-form-item>
+              </el-col>
+            </el-footer>
+
+          </el-container>
+        </el-form>
       </el-card>
     </div>
   </div>
@@ -135,6 +135,7 @@
         tabId: '',
         //用户详情
         content:{
+          avatar: '',
           firstName:'',
           lastName:'',
           links: {
@@ -168,52 +169,35 @@
     created() {
       this.tabId = this.$route.params.tabId
       utils.readAboutMeContent(this.tabId).then(res => {
-          const content = JSON.parse(res.content);
-          console.log(content)
-          //取得数据源
-          const form = this.content
-          const editor = this.$refs.detailsEditor
+        const _this = this
+        const content = JSON.parse(res.content);
+        console.log(content)
+        //取得数据源
+        const form = this.content
+        const editor = this.$refs.detailsEditor
 
-          //页面填值
-          this.title = res.title
-          //名字
-          form.firstName = content.firstName
-          form.lastName = content.lastName
-          form.links = content.links
-          //邮箱
-          form.email = content.email
-          //文件url
-          form.attachment = content.attachment
-          //编辑器内容
-          form.details = content.details
-          editor.content = content.details
-          // console.log(form)
+        //标题
+        this.title = res.title
+        //头像
+        form.avatar = content.avatar
+        utils.readImage(form.avatar).then(res => {
+          //解析图像Blob数据
+          _this.imageUrl = URL.createObjectURL(res)
+        })
+        //名字
+        form.firstName = content.firstName
+        form.lastName = content.lastName
+        form.links = content.links
+        //邮箱
+        form.email = content.email
+        //文件url
+        form.attachment = content.attachment
+        //编辑器内容
+        form.details = content.details
+        editor.content = content.details
+        // console.log(form)
       })
-      // const _this = this
-      // //加载更新前的数据
-      // return axios.get('/tab/'+_this.tabId).then(res => {
-      //   console.log(res)
-      //   const content = JSON.parse(res.data.data.content);
-      //   console.log(content)
-      //   //取得数据源
-      //   const form = this.content
-      //   const editor = this.$refs.detailsEditor
-      //
-      //   //页面填值
-      //   this.title = res.data.data.title
-      //   //名字
-      //   form.firstName = content.firstName
-      //   form.lastName = content.lastName
-      //   form.links = content.links
-      //   //邮箱
-      //   form.email = content.email
-      //   //文件url
-      //   form.attachment = content.attachment
-      //   //编辑器内容
-      //   form.details = content.details
-      //   editor.content = content.details
-      //   // console.log(form)
-      // })
+
     },
     methods: {
       submitForm(){
@@ -260,12 +244,55 @@
 
         if (!isJPG) {
           this.$message.error('Only JPG is available!');
+          return
         }
         if (!isLt2M) {
           this.$message.error('The size of image should not exceed 2MB!');
+          return
         }
+
+        // console.log(file)
+        let fd = new FormData()
+        fd.append('picture', file)
+        // console.log(fd)
+
+        let _this = this
+        let name = ''
+
+        utils.createImage(fd).then(res => {
+          name = res
+          utils.readImage(res).then(res => {
+            //解析图像Blob数据
+            _this.imageUrl = URL.createObjectURL(res)
+            //头像文件名
+            _this.content.avatar = name;
+          })
+        })
+
+        // new Promise(resolve => {
+        //   axios.post('/file', fd,
+        //     {
+        //       headers: {
+        //         'Content-Type': 'multipart/form-data',
+        //       }
+        //     }).then(res => {
+        //       // console.log(res.data)
+        //       _this.avatar = res.data.data.file_id
+        //       // _this.imageUrl = "http://8.210.28.169:8883/api/v1/file/"+res.data.data.file_id
+        //       resolve(res.data.data.file_id)
+        //   }).catch(error => {
+        //     console.log(error)
+        //   })
+        // }).then(() => {
+        //   axios.get('/file/'+_this.avatar, { responseType: 'blob'}).then(res => {
+        //     console.log(res)
+        //     _this.imageUrl = URL.createObjectURL(res.data)
+        //   })
+        // })
+
         return isJPG && isLt2M;
       }
+
 
 
       // changeParentContent(val){

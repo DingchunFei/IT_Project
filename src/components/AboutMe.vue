@@ -1,78 +1,78 @@
 <template>
   <div>
     <el-card class="richText">
-        <el-container style="height: 100%">
-          <el-main>
-            <el-row :gutter="20">
+      <el-container style="height: 100%">
+        <el-main>
+          <el-row :gutter="20">
 
-              <el-col :span="5">
+            <el-col :span="5">
+              <div>
                 <div>
-                  <div>
-                    <el-avatar
-                            icon="el-icon-user-solid"
-                            :size="200"
-                            shape="square"
-                            fit="fill"
-                            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                    ></el-avatar>
-                  </div>
+                  <el-avatar
+                      icon="el-icon-user-solid"
+                      :size="200"
+                      shape="square"
+                      fit="fill"
+                      :src="imageUrl"
+                  ></el-avatar>
                 </div>
-              </el-col>
-
-              <el-col :span="16">
-                <el-row :gutter="20">
-                  <el-col :span="16">
-                    <div>
-                      <h1>{{tabContent.firstName}} {{tabContent.lastName}}</h1>
-                    </div>
-                  </el-col>
-                </el-row>
-                <el-row>
-                  <div v-html="tabContent.details">
-                  </div>
-                </el-row>
-              </el-col>
-
-              <el-col :span="3" :gutter="20">
-                <el-row>
-                  <h1>Links</h1>
-                </el-row>
-                <el-row>
-                  <div>
-                    {{tabContent.links.github}}
-                  </div>
-                </el-row>
-                <el-row>
-                  <div>
-                    {{tabContent.links.linkedin}}
-                  </div>
-                </el-row>
-                <el-row>
-                  <h1>Contact</h1>
-                </el-row>
-                <el-row>
-                  <div>
-                    {{tabContent.email}}
-                  </div>
-                </el-row>
-                <el-row>
-                  <h1>Attachment</h1>
-                </el-row>
-                <el-row>
-                  <div>
-                    {{tabContent.attachment}}
-                  </div>
-                </el-row>
-              </el-col>
-            </el-row>
-          </el-main>
-
-          <el-footer>
-            <el-col >
+              </div>
             </el-col>
-          </el-footer>
 
-        </el-container>
+            <el-col :span="16">
+              <el-row :gutter="20">
+                <el-col :span="16">
+                  <div>
+                    <h1>{{tabContent.firstName}} {{tabContent.lastName}}</h1>
+                  </div>
+                </el-col>
+              </el-row>
+              <el-row>
+                <div v-html="tabContent.details">
+                </div>
+              </el-row>
+            </el-col>
+
+            <el-col :span="3" :gutter="20">
+              <el-row>
+                <h1>Links</h1>
+              </el-row>
+              <el-row>
+                <div>
+                  {{tabContent.links.github}}
+                </div>
+              </el-row>
+              <el-row>
+                <div>
+                  {{tabContent.links.linkedin}}
+                </div>
+              </el-row>
+              <el-row>
+                <h1>Contact</h1>
+              </el-row>
+              <el-row>
+                <div>
+                  {{tabContent.email}}
+                </div>
+              </el-row>
+              <el-row>
+                <h1>Attachment</h1>
+              </el-row>
+              <el-row>
+                <div>
+                  {{tabContent.attachment}}
+                </div>
+              </el-row>
+            </el-col>
+          </el-row>
+        </el-main>
+
+        <el-footer>
+          <el-col >
+          </el-col>
+        </el-footer>
+
+      </el-container>
     </el-card>
 
     <el-menu
@@ -97,6 +97,7 @@
     data(){
       return {
         tabContent: {},
+        imageUrl: '',
       }
     },
     created() {
@@ -109,7 +110,11 @@
         console.log(id)
         //没缓存再发送请求
         utils.readAboutMeContent(id).then(res => {
-            this.tabContent = JSON.parse(res.content)
+          this.tabContent = JSON.parse(res.content)
+          utils.readImage(this.tabContent.avatar).then(res => {
+            //解析图像Blob数据
+            this.imageUrl = URL.createObjectURL(res)
+          })
         })
         // axios.get('/tab/'+id).then(res => {
         //   const data = res.data.data
