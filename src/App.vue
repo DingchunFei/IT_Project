@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <div class="logo">
-          <img alt="Vue logo" src="./assets/eLogo.png">
+          <img alt="Vue logo" src="./assets/epLogo.png">
       </div>
     <transition name="slide-fade" mode="out-in">
       <router-view></router-view>
