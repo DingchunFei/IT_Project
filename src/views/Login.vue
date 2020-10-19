@@ -18,6 +18,7 @@
                             <el-button type="primary" plain @click="onsubmit" size="medium">Login</el-button>
                         </el-form-item>
                         <el-link href="Register" target="_blank" type="primary">register</el-link>
+                        <el-link href="FindPassworld" target="_blank" type="primary">forget password</el-link>
                     </el-form>
                     <!--Error messeage -->
                     <div><p class="error-content">{{ErrorMessage}}</p></div>
