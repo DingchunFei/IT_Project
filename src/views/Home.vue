@@ -92,6 +92,11 @@
                                     <el-button v-for="(tabs,i) in tabs" v-bind:key="i" @click="deleteTabs(tabs.tab_id)" v-model="tabId">{{tabs.title}}</el-button>
                                 </el-dropdown-menu>
                             </el-dropdown>
+
+                            <!-- 按钮：跳转到profile页 -->
+                            <el-button type="primary" @click="goProfile()">
+                                <i class="el-icon-s-order"></i>
+                            </el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -270,6 +275,15 @@
         });
     }
 
+    //跳转到profile页
+    function goProfile() {
+        this.$router.push({
+            name: 'Profile',
+            params: {
+            }
+        })
+    }
+
     export default {
         name: "Home",
         components: {AboutMe, Tab},
@@ -335,7 +349,7 @@
             getTabs,
             onsubmit,
             deleteTabs,
-
+            goProfile,
         }
     }
 </script>
