@@ -231,7 +231,7 @@
         .catch((error) => {
             console.log("errorMessage: " + error);
         });
-}
+    }
 
     function onsubmit() {
     let vm = this;
@@ -250,7 +250,7 @@
         .catch((error) => {
             console.log("error: " + error);
         });
-}
+    }
 
     function deleteTabs(TabId) {
     //let vm = e;
@@ -268,7 +268,7 @@
         .catch((error) => {
             console.log("errorMessage: " + error);
         });
-}
+    }
 
     export default {
         name: "Home",
