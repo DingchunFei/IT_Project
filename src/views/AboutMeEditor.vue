@@ -171,7 +171,7 @@
       utils.readAboutMeContent(this.tabId).then(res => {
         const _this = this
         const content = JSON.parse(res.content);
-        console.log(content)
+        // console.log(content)
         //取得数据源
         const form = this.content
         const editor = this.$refs.detailsEditor
@@ -183,6 +183,7 @@
         utils.readImage(form.avatar).then(res => {
           //解析图像Blob数据
           _this.imageUrl = URL.createObjectURL(res)
+          console.log("image: "+_this.imageUrl)
         })
         //名字
         form.firstName = content.firstName
@@ -208,7 +209,7 @@
         const editor = this.$refs.detailsEditor
         //获取数据
         form.details = editor.content
-        console.log("send:"+JSON.stringify(_this.content))
+        // console.log("send:"+JSON.stringify(_this.content))
 
         return axios.post('/tab/'+_this.tabId, {title: _this.title, content: JSON.stringify(_this.content)}).then(res => {
           console.log(res)
@@ -219,20 +220,6 @@
       goHome(){
         this.$router.push("/Home");
       },
-
-      // handleRemove(file, fileList) {
-      //   console.log(file, fileList);
-      // },
-      // handlePreview(file) {
-      //   console.log(file);
-      // },
-      // handleExceed(files, fileList) {
-      //   this.$message.warning(`You have upload ${files.length + fileList.length} files`);
-      // },
-      // beforeRemove(file, fileList) {
-      //   console.log(fileList)
-      //   return this.$confirm(`Are you sure to remove ${ file.name }?`);
-      // },
 
       //头像上传
       handleAvatarSuccess(res, file) {
@@ -268,27 +255,6 @@
             _this.content.avatar = name;
           })
         })
-
-        // new Promise(resolve => {
-        //   axios.post('/file', fd,
-        //     {
-        //       headers: {
-        //         'Content-Type': 'multipart/form-data',
-        //       }
-        //     }).then(res => {
-        //       // console.log(res.data)
-        //       _this.avatar = res.data.data.file_id
-        //       // _this.imageUrl = "http://8.210.28.169:8883/api/v1/file/"+res.data.data.file_id
-        //       resolve(res.data.data.file_id)
-        //   }).catch(error => {
-        //     console.log(error)
-        //   })
-        // }).then(() => {
-        //   axios.get('/file/'+_this.avatar, { responseType: 'blob'}).then(res => {
-        //     console.log(res)
-        //     _this.imageUrl = URL.createObjectURL(res.data)
-        //   })
-        // })
 
         return isJPG && isLt2M;
       }
