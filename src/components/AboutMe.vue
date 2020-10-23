@@ -73,15 +73,11 @@
         </el-footer>
 
       </el-container>
-    </el-card>
 
-    <el-menu
-        class="el-menu-demo"
-        mode="horizontal"
-        router
-    >
-      <el-menu-item @click="updateTab()"><i class="el-icon-edit"></i></el-menu-item>
-    </el-menu>
+      <el-button type="primary" @click="updateTab()">
+        Update
+      </el-button>
+    </el-card>
   </div>
 </template>
 

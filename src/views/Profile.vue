@@ -50,26 +50,20 @@
               </el-row>
 <!--row: buttons-->
               <el-row type="flex" justify="center">
-                <el-col :span="8">
-                  <div>
-                    <el-button v-if="isEditable" type="primary" @click="submitForm">
-                      Submit
-                    </el-button>
-                    <el-button v-else type="primary" @click="onEdit">
-                      Edit
-                    </el-button>
-                  </div>
-                </el-col>
-                <el-col :span="8">
-                  <div>
-                    <el-button v-if="isEditable" type="primary" @click="cancel">
-                      Cancel
-                    </el-button>
-                    <el-button v-else type="primary" @click="goHome">
-                      Home
-                    </el-button>
-                  </div>
-                </el-col>
+                <el-button-group>
+                  <el-button v-if="isEditable" type="primary" @click="submitForm">
+                    Submit
+                  </el-button>
+                  <el-button v-else type="primary" @click="onEdit">
+                    Edit
+                  </el-button>
+                  <el-button v-if="isEditable" type="primary" @click="cancel">
+                    Cancel
+                  </el-button>
+                  <el-button v-else type="primary" @click="goHome">
+                    Home
+                  </el-button>
+                </el-button-group>
               </el-row>
             </el-col>
 

@@ -91,8 +91,14 @@ export default {
   },
 
   //读取文件
-  readFile: function () {
-
+  //输入String：图片名（无后缀）
+  //返回Blob：图片的blob格式数据
+  readFile: function (fileName) {
+    return new Promise(resolve => {
+      axios.get('/file/'+fileName, { responseType: 'blob'}).then(res => {
+        resolve(res.data)
+      })
+    })
   },
 
   //更新文件
