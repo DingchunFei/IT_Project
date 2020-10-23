@@ -88,5 +88,15 @@ export default {
         console.log(error)
       })
     })
+  },
+
+  //读取文件
+  readFile: function () {
+
+  },
+
+  //更新文件
+  updateFile: function () {
+
   }
 }

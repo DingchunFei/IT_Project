@@ -12,7 +12,7 @@
                             <el-input v-model="formData.email" placeholder="E-mail" clearable></el-input>
                         </el-form-item>
                         <el-form-item label="Password" prop="UserPassword">
-                            <el-input v-model="formData.password" :maxlength="18" placeholder="Password" clearable></el-input>
+                            <el-input v-model="formData.password" show-password :maxlength="18" placeholder="Password" clearable></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-button type="primary" plain @click="onsubmit" size="medium">Login</el-button>
@@ -23,6 +23,7 @@
                     <!--Error messeage -->
                     <div><p class="error-content">{{ErrorMessage}}</p></div>
                 </v-card-text>
+                <ThemePicker v-model="theme" v-show="false"/>
             </v-card>
         </div>
     </div>
@@ -31,6 +32,7 @@
 <script>
     import axios from "axios";
     import crypto from "crypto";
+    import ThemePicker from "../components/ThemePicker";
     function onsubmit() {
         let vm = this;
 
@@ -49,6 +51,8 @@
             .then((response)=>{
                 console.log(response);
                 if(response.data.code === 0){
+                    vm.theme = response.data.data.theme
+                    console.log("theme: "+vm.theme)
                     vm.$router.push("/Home");
                 }else {
                     this.errored = true;
@@ -63,8 +67,10 @@
 
     export default {
         name: "Login",
+        components: {ThemePicker},
         data() {
             return {
+                theme: '#409EFF',
                 ErrorMessage: "",
                 formData: {
                     email: '',

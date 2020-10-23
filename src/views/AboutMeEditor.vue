@@ -91,11 +91,26 @@
                       <el-input v-model="content.email"></el-input>
                     </el-form-item>
                   </el-row>
+<!--   row: 上传文件              -->
                   <el-row>
                     <el-form-item label="Attachment" prop="attachment">
-                      <el-input v-model="content.attachment"></el-input>
+                      <el-upload
+                          class="upload-demo"
+                          action=""
+                          :on-preview="handlePreview"
+                          :on-remove="handleRemove"
+                          :before-upload="beforeUploadFile"
+                          :before-remove="beforeRemove"
+                          multiple
+                          :limit="3"
+                          :on-exceed="handleExceed"
+                          :file-list="fileList">
+                        <el-button size="small" type="primary">Upload your files</el-button>
+                        <div slot="tip" class="el-upload__tip">Only 3 files, and not exceeding 500kb for each.</div>
+                      </el-upload>
                     </el-form-item>
                   </el-row>
+
                 </el-col>
               </el-row>
             </el-main>
@@ -149,7 +164,16 @@
         //头像地址
         // fileList: [],
         imageUrl: '',
-
+        fileList:
+          [
+            // {
+            //   name: 'food.jpeg',
+            //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // },
+            // {name: 'food2.jpeg',
+            //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // }
+          ],
         rules:{
           name:[
             { required: false, message: 'Please enter your name', trigger: 'blur' }
@@ -257,13 +281,30 @@
         })
 
         return isJPG && isLt2M;
+      },
+
+      //上传文件
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`Do not exceed 3 files. Now you are selecting ${files.length} files，you have selected ${files.length + fileList.length} files`);
+      },
+      beforeRemove(file, fileList) {
+        console.log(fileList)
+        return this.$confirm(`Are your sure to remove ${ file.name } ?`);
+      },
+      beforeUploadFile(file){
+        console.log(file)
+        const isLt500kb = file.size / 1024 < 500;
+        if (!isLt500kb) {
+          this.$message.error('The size of image should not exceed 500kb!');
+          return
+        }
       }
-
-
-
-      // changeParentContent(val){
-      //   console.log(val)
-      // }
     }
   }
 

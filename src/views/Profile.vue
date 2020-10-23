@@ -35,8 +35,16 @@
 <!--     row: theme selector         -->
               <el-row type="flex" justify="center">
                 <el-col :span="8">
-                  <div>
-                    <ThemePicker :theme="profile.theme" />
+                  <div v-if="isEditable">
+                    <ThemePicker
+                        :theme="profile.theme"
+                        @onThemeChange="onThemeChange"
+                    />
+                  </div>
+                  <div v-else>
+                    <el-button type="primary">
+                      Theme
+                    </el-button>
                   </div>
                 </el-col>
               </el-row>
@@ -64,6 +72,7 @@
                 </el-col>
               </el-row>
             </el-col>
+
 
 <!--col: name-->
             <el-col :span="12">
@@ -120,7 +129,7 @@
       //theme改变后获取theme
       onThemeChange(theme){
         this.profile.theme = theme
-        console.log(theme)
+        console.log("theme: "+theme)
       },
 
       //编辑
