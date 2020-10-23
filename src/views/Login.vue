@@ -17,7 +17,7 @@
                         <el-form-item>
                             <el-button type="primary" plain @click="onsubmit" size="medium">Login</el-button>
                         </el-form-item>
-                        <el-link href="Register" target="_blank" type="primary">register</el-link>
+                        <el-link href="Register" target="_blank" type="primary">register</el-link> |
                         <el-link href="FindPassworld" target="_blank" type="primary">forget password</el-link>
                     </el-form>
                     <!--Error messeage -->
@@ -33,7 +33,6 @@
     import crypto from "crypto";
     function onsubmit() {
         let vm = this;
-
         let md5 = crypto.createHash("md5");
         md5.update(vm.formData.password);
         let password = md5.digest('hex');  //MD5 password

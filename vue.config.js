@@ -76,7 +76,6 @@ module.exports = {
         },
         proxy: {
             '/api': {
-               //target:'http://api.douban.com/v2',
                 target: 'http://8.210.28.169:8883/api/v1',
                 ws: true,
                 changeOrigin: true,

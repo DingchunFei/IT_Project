@@ -68,6 +68,7 @@
         name: "Register",
         data() {
             return {
+                Message:'',
                 formData: {
                     email: '',
                     cardType: 1,
@@ -75,7 +76,6 @@
                     RetypePassword:'',
                     firstName:'',
                     lastName:'',
-                    Message:'',
                 },
                 rule: {
                     UserEmail: [

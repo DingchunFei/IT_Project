@@ -51,7 +51,7 @@
                         mode="horizontal"
                         router
                 >
-                    <el-menu-item index="/Add"><i class="el-icon-user-solid"></i></el-menu-item>
+                    <el-menu-item index="" @click="logOut"><i class="el-icon-user-solid"></i></el-menu-item>
                     <el-menu-item index="/"><i class="el-icon-download"></i></el-menu-item>
                     <el-menu-item index="/"><i class="el-icon-setting"></i></el-menu-item>
                     <el-menu-item index="/"><i class="el-icon-upload"></i></el-menu-item>
@@ -270,6 +270,21 @@
         });
 }
 
+    function logOut() {
+    let vm = this;
+    return axios
+        .post('/logout',)
+        .then((response) => {
+            console.log(response);
+            if (response.data.code === 0) {
+                vm.$router.push("/");
+            }
+        })
+        .catch((error) => {
+            console.log("errorMessage: " + error);
+        });
+}
+
     export default {
         name: "Home",
         components: {AboutMe, Tab},
@@ -335,6 +350,7 @@
             getTabs,
             onsubmit,
             deleteTabs,
+            logOut,
 
         }
     }

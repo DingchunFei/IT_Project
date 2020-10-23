@@ -44,6 +44,16 @@ const routes = [
         name: 'TabEditor',
         component: () => import('../views/TabEditor.vue')
     },
+    {
+        path: '/FindPassworld',
+        name: 'FindPassword',
+        component: () => import('../views/FindPassworld.vue')
+    },
+    {
+        path: '/forget/validate',
+        name: 'forget/validate',
+        component: () => import('../views/ForgetValidate.vue')
+    },
 ]
 
 const router = new VueRouter({
