@@ -63,4 +63,40 @@ export default {
       })
     })
   },
+
+  readProfile: function () {
+    return new Promise(resolve => {
+      axios.get('/profile', {}).then(res => {
+        resolve(res.data)
+      })
+    })
+  },
+  updateProfile: function (profile) {
+    return new Promise(resolve => {
+      axios.post('/profile',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          fist_name: profile.firstName,
+          last_name: profile.lastName,
+          avatar: profile.avatar,
+          theme: profile.theme,
+        }).then(res => {
+        resolve(res.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    })
+  },
+
+  //读取文件
+  readFile: function () {
+
+  },
+
+  //更新文件
+  updateFile: function () {
+
+  }
 }
