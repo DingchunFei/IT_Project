@@ -97,14 +97,16 @@
                       <el-upload
                           class="upload-demo"
                           action=""
+                          :http-request = "onUpload"
                           :on-preview="handlePreview"
                           :on-remove="handleRemove"
+                          :on-success="handleSuccess"
                           :before-upload="beforeUploadFile"
                           :before-remove="beforeRemove"
                           multiple
                           :limit="3"
                           :on-exceed="handleExceed"
-                          :file-list="fileList">
+                          :file-list="content.attachment">
                         <el-button size="small" type="primary">Upload your files</el-button>
                         <div slot="tip" class="el-upload__tip">Only 3 files, and not exceeding 500kb for each.</div>
                       </el-upload>
@@ -136,9 +138,18 @@
 </template>
 
 <script>
+  /* eslint-disable */
   import axios from "axios";
   import Editor from '@/components/TextEditor'
   import utils from "../common/utils";
+
+  class Item {
+    constructor(fileName, fileId) {
+      this.name = fileName
+      this.url = fileId
+    }
+  }
+
   export default {
     name: 'AboutMeEditor',
     components: {
@@ -159,7 +170,7 @@
           },
           email:'',
           details:'',
-          attachment: '',
+          attachment: [],
         },
         //头像地址
         // fileList: [],
@@ -215,8 +226,11 @@
         form.links = content.links
         //邮箱
         form.email = content.email
-        //文件url
-        form.attachment = content.attachment
+        //文件
+        if(content.attachment != null && content.attachment != ''){
+          form.attachment = content.attachment
+          console.log("attach: ",content.attachment)
+        }
         //编辑器内容
         form.details = content.details
         editor.content = content.details
@@ -233,7 +247,7 @@
         const editor = this.$refs.detailsEditor
         //获取数据
         form.details = editor.content
-        // console.log("send:"+JSON.stringify(_this.content))
+        // console.log("submitForm:", JSON.stringify(_this.content))
 
         return axios.post('/tab/'+_this.tabId, {title: _this.title, content: JSON.stringify(_this.content)}).then(res => {
           console.log(res)
@@ -285,10 +299,17 @@
 
       //上传文件
       handleRemove(file, fileList) {
-        console.log(file, fileList);
+        console.log("handleRemove", file, fileList);
+        let arr = this.content.attachment
+        for(let i = 0; i < arr.length; i++){
+          if(arr[i].url === file.url){
+            console.log("find", arr[i])
+            arr.splice(i, 1)
+          }
+        }
       },
       handlePreview(file) {
-        console.log(file);
+        console.log("handlePreview", file);
       },
       handleExceed(files, fileList) {
         this.$message.warning(`Do not exceed 3 files. Now you are selecting ${files.length} files，you have selected ${files.length + fileList.length} files`);
@@ -301,10 +322,34 @@
         console.log(file)
         const isLt500kb = file.size / 1024 < 500;
         if (!isLt500kb) {
-          this.$message.error('The size of image should not exceed 500kb!');
-          return
+          this.$message.error('The size of image should not exceed 500kb!')
+          return isLt500kb
         }
-      }
+        return true
+      },
+      onUpload(data){
+        let _this = this
+        let file = data.file
+        let fd = new FormData()
+        let fileId = ''
+        fd.append('picture', file)
+        utils.createFile(fd).then(res => {
+          // fileId = res
+          // console.log("fileId: ", fileId)
+          // let item = new Item(file.name, fileId)
+          // _this.content.attachment.push(item)
+          console.log("onUpload: ", _this.content.attachment)
+          // utils.readImage(res).then(res => {
+          //   //解析图像Blob数据
+          //   _this.imageUrl = URL.createObjectURL(res)
+          //   //头像文件名
+          //   _this.content.avatar = name;
+          // })
+        })
+      },
+      handleSuccess(res, file, fileList){
+        console.log("handleSuccess: ", file)
+      },
     }
   }
 

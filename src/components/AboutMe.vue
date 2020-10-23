@@ -59,8 +59,8 @@
                 <h1>Attachment</h1>
               </el-row>
               <el-row>
-                <div>
-                  {{tabContent.attachment}}
+                <div v-for="item in attachment" :key="item.url">
+                  <i class="el-icon-tickets"></i>  {{item.name}}
                 </div>
               </el-row>
             </el-col>
@@ -94,6 +94,7 @@
       return {
         tabContent: {},
         imageUrl: '',
+        attachment: []
       }
     },
     created() {
@@ -107,6 +108,12 @@
         //没缓存再发送请求
         utils.readAboutMeContent(id).then(res => {
           this.tabContent = JSON.parse(res.content)
+          console.log("content: ", this.tabContent)
+          if(typeof this.tabContent.attachment != 'undefined'
+            && this.tabContent.attachment != null
+            && this.tabContent.attachment != ""){
+            this.attachment = this.tabContent.attachment
+          }
           utils.readImage(this.tabContent.avatar).then(res => {
             //解析图像Blob数据
             this.imageUrl = URL.createObjectURL(res)
@@ -135,5 +142,7 @@
 </script>
 
 <style scoped>
-
+  .el-upload-list__item-status-label {
+    display: none;
+  }
 </style>

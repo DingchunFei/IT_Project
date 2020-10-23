@@ -91,18 +91,49 @@ export default {
   },
 
   //读取文件
-  //输入String：图片名（无后缀）
-  //返回Blob：图片的blob格式数据
-  readFile: function (fileName) {
+  //输入String：文件名（无后缀）
+  //返回Blob：文件的blob格式数据
+  readFile: function (fileId) {
     return new Promise(resolve => {
-      axios.get('/file/'+fileName, { responseType: 'blob'}).then(res => {
+      axios.get('/file/'+fileId, { responseType: 'blob'}).then(res => {
         resolve(res.data)
       })
     })
   },
 
-  //更新文件
-  updateFile: function () {
+  //添加文件
+  //输入FormData：文件
+  //返回String：文件名
+  createFile: function (file) {
+    return new Promise(resolve => {
+      axios.post('/file', file,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(res => {
+        resolve(res.data.data.file_id)
+      }).catch(error => {
+        console.log(error)
+      })
+    })
+  },
 
-  }
+  //更新文件
+  //输入String，FormData：文件id，文件
+  //返回String：文件名
+  updateFile: function (fileId, file) {
+    return new Promise(resolve => {
+      axios.post('/file/'+fileId, file,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(res => {
+        resolve(res.data.data.file_id)
+      }).catch(error => {
+        console.log(error)
+      })
+    })
+  },
 }
