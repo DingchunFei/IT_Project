@@ -59,6 +59,7 @@ export default {
   readImage: function (fileName) {
     return new Promise(resolve => {
       axios.get('/file/'+fileName, { responseType: 'blob'}).then(res => {
+        console.log("image",res)
         resolve(res.data)
       })
     })
@@ -96,6 +97,7 @@ export default {
   readFile: function (fileId) {
     return new Promise(resolve => {
       axios.get('/file/'+fileId, { responseType: 'blob'}).then(res => {
+        console.log("file", res)
         resolve(res.data)
       })
     })
@@ -112,6 +114,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           }
         }).then(res => {
+          console.log("createFile",res)
         resolve(res.data.data.file_id)
       }).catch(error => {
         console.log(error)

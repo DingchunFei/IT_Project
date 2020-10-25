@@ -309,20 +309,21 @@
         }
       },
       handlePreview(file) {
+        console.log("handlePreview", this.content.attachment);
         console.log("handlePreview", file);
       },
       handleExceed(files, fileList) {
         this.$message.warning(`Do not exceed 3 files. Now you are selecting ${files.length} files，you have selected ${files.length + fileList.length} files`);
       },
       beforeRemove(file, fileList) {
-        console.log(fileList)
+        console.log("beforeRemove",fileList)
         return this.$confirm(`Are your sure to remove ${ file.name } ?`);
       },
       beforeUploadFile(file){
-        console.log(file)
+        console.log("beforeUploadFile",file)
         const isLt500kb = file.size / 1024 < 500;
         if (!isLt500kb) {
-          this.$message.error('The size of image should not exceed 500kb!')
+          this.$message.error('The size of file should not exceed 500kb!')
           return isLt500kb
         }
         return true
@@ -334,10 +335,10 @@
         let fileId = ''
         fd.append('picture', file)
         utils.createFile(fd).then(res => {
-          // fileId = res
-          // console.log("fileId: ", fileId)
-          // let item = new Item(file.name, fileId)
-          // _this.content.attachment.push(item)
+          fileId = res
+          let item = new Item(file.name, fileId)
+          _this.content.attachment.push(item)
+          console.log("onUpload: ", res)
           console.log("onUpload: ", _this.content.attachment)
           // utils.readImage(res).then(res => {
           //   //解析图像Blob数据
@@ -348,7 +349,7 @@
         })
       },
       handleSuccess(res, file, fileList){
-        console.log("handleSuccess: ", file)
+        console.log("handleSuccess: ", fileList)
       },
     }
   }

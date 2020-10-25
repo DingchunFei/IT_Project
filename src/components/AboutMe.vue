@@ -59,8 +59,8 @@
                 <h1>Attachment</h1>
               </el-row>
               <el-row>
-                <div v-for="item in attachment" :key="item.url">
-                  <i class="el-icon-tickets"></i>  {{item.name}}
+                <div v-for="item in attachment" :key="item.url" @click="downloadFile(item.url)">
+                  <i class="el-icon-tickets"></i>  {{item.name}} <i class="el-icon-download"></i>
                 </div>
               </el-row>
             </el-col>
@@ -137,6 +137,11 @@
         })
         console.log("update this tab")
       },
+      downloadFile(fileId){
+        utils.readFile(fileId).then(res => {
+          console.log("downloadFile",res)
+        })
+      }
     }
   }
 </script>
