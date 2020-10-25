@@ -17,7 +17,15 @@
       default: { // 初始化主题，可由外部传入
         type: String,
         //default: '#EB815B'
-        default: ""+localStorage.getItem("tremePackers")+""
+        default: function () {
+          let theme = localStorage.getItem("theme")
+          if(theme != null && theme != ''){
+            return ""+theme+""
+          }
+          else{
+            return '#EB815B'
+          }
+        }
       },
       size: { // 初始化主题，可由外部传入
         type: String,
@@ -81,7 +89,7 @@
         // 响应外部操作
         this.$emit('onThemeChange', val)
         //存入localStorage
-        localStorage.setItem('tremePackers',val);
+        localStorage.setItem('theme',val);
         if(this.showSuccess) {
           this.$message({
             message: 'Theme has been changed successfully',

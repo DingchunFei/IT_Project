@@ -59,7 +59,7 @@
                 <h1>Attachment</h1>
               </el-row>
               <el-row>
-                <div v-for="item in attachment" :key="item.url" @click="downloadFile(item.url)">
+                <div v-for="item in attachment" :key="item.url" @click="downloadFile(item.name, item.url)">
                   <i class="el-icon-tickets"></i>  {{item.name}} <i class="el-icon-download"></i>
                 </div>
               </el-row>
@@ -137,9 +137,20 @@
         })
         console.log("update this tab")
       },
-      downloadFile(fileId){
+
+      //下载文件
+      downloadFile(fileName, fileId){
         utils.readFile(fileId).then(res => {
-          console.log("downloadFile",res)
+          console.log("downloadFile",fileName, res)
+          let url = window.URL.createObjectURL(res)
+          let link = document.createElement('a')
+          link.style.display = 'none'
+          link.href = url
+          link.setAttribute('download', fileName)// 文件名
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link) // 下载完成移除元素
+          window.URL.revokeObjectURL(url) // 释放掉blob对象
         })
       }
     }

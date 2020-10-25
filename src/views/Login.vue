@@ -50,8 +50,13 @@
             .then((response)=>{
                 console.log(response);
                 if(response.data.code === 0){
-                    vm.theme = response.data.data.theme
-                    console.log("theme: "+vm.theme)
+                    let theme = response.data.data.theme
+                    console.log("login", response)
+                    if(theme != null && theme != ''){
+                        vm.theme = theme
+                        localStorage.setItem("theme", vm.theme)
+                        console.log("theme: "+vm.theme)
+                    }
                     vm.$router.push("/Home");
                 }else {
                     this.errored = true;
