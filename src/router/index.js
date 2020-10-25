@@ -54,6 +54,11 @@ const routes = [
         name: 'forget/validate',
         component: () => import('../views/ForgetValidate.vue')
     },
+    {
+        path: '/Profile',
+        name: 'Profile',
+        component: () => import('../views/Profile.vue')
+    },
 ]
 
 const router = new VueRouter({

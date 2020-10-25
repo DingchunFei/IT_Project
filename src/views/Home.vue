@@ -92,6 +92,11 @@
                                     <el-button v-for="(tabs,i) in tabs" v-bind:key="i" @click="deleteTabs(tabs.tab_id)" v-model="tabId">{{tabs.title}}</el-button>
                                 </el-dropdown-menu>
                             </el-dropdown>
+
+                            <!-- 按钮：跳转到profile页 -->
+                            <el-button type="primary" @click="goProfile()">
+                                <i class="el-icon-s-order"></i>
+                            </el-button>
                         </div>
                     </el-col>
                 </el-row>
@@ -231,7 +236,7 @@
         .catch((error) => {
             console.log("errorMessage: " + error);
         });
-}
+    }
 
     function onsubmit() {
     let vm = this;
@@ -250,7 +255,7 @@
         .catch((error) => {
             console.log("error: " + error);
         });
-}
+    }
 
     function deleteTabs(TabId) {
     //let vm = e;
@@ -268,7 +273,16 @@
         .catch((error) => {
             console.log("errorMessage: " + error);
         });
-}
+    }
+
+    //跳转到profile页
+    function goProfile() {
+        this.$router.push({
+            name: 'Profile',
+            params: {
+            }
+        })
+    }
 
     function logOut() {
     let vm = this;
@@ -351,7 +365,7 @@
             onsubmit,
             deleteTabs,
             logOut,
-
+            goProfile,
         }
     }
 </script>

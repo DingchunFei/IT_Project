@@ -59,8 +59,8 @@
                 <h1>Attachment</h1>
               </el-row>
               <el-row>
-                <div>
-                  {{tabContent.attachment}}
+                <div v-for="item in attachment" :key="item.url" @click="downloadFile(item.name, item.url)">
+                  <i class="el-icon-tickets"></i>  {{item.name}} <i class="el-icon-download"></i>
                 </div>
               </el-row>
             </el-col>
@@ -73,15 +73,11 @@
         </el-footer>
 
       </el-container>
-    </el-card>
 
-    <el-menu
-        class="el-menu-demo"
-        mode="horizontal"
-        router
-    >
-      <el-menu-item @click="updateTab()"><i class="el-icon-edit"></i></el-menu-item>
-    </el-menu>
+      <el-button type="primary" @click="updateTab()">
+        Update
+      </el-button>
+    </el-card>
   </div>
 </template>
 
@@ -98,6 +94,7 @@
       return {
         tabContent: {},
         imageUrl: '',
+        attachment: []
       }
     },
     created() {
@@ -111,6 +108,12 @@
         //没缓存再发送请求
         utils.readAboutMeContent(id).then(res => {
           this.tabContent = JSON.parse(res.content)
+          console.log("content: ", this.tabContent)
+          if(typeof this.tabContent.attachment != 'undefined'
+            && this.tabContent.attachment != null
+            && this.tabContent.attachment != ""){
+            this.attachment = this.tabContent.attachment
+          }
           utils.readImage(this.tabContent.avatar).then(res => {
             //解析图像Blob数据
             this.imageUrl = URL.createObjectURL(res)
@@ -134,10 +137,28 @@
         })
         console.log("update this tab")
       },
+
+      //下载文件
+      downloadFile(fileName, fileId){
+        utils.readFile(fileId).then(res => {
+          console.log("downloadFile",fileName, res)
+          let url = window.URL.createObjectURL(res)
+          let link = document.createElement('a')
+          link.style.display = 'none'
+          link.href = url
+          link.setAttribute('download', fileName)// 文件名
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link) // 下载完成移除元素
+          window.URL.revokeObjectURL(url) // 释放掉blob对象
+        })
+      }
     }
   }
 </script>
 
 <style scoped>
-
+  .el-upload-list__item-status-label {
+    display: none;
+  }
 </style>

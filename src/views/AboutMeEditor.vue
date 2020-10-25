@@ -91,11 +91,28 @@
                       <el-input v-model="content.email"></el-input>
                     </el-form-item>
                   </el-row>
+<!--   row: 上传文件              -->
                   <el-row>
                     <el-form-item label="Attachment" prop="attachment">
-                      <el-input v-model="content.attachment"></el-input>
+                      <el-upload
+                          class="upload-demo"
+                          action=""
+                          :http-request = "onUpload"
+                          :on-preview="handlePreview"
+                          :on-remove="handleRemove"
+                          :on-success="handleSuccess"
+                          :before-upload="beforeUploadFile"
+                          :before-remove="beforeRemove"
+                          multiple
+                          :limit="3"
+                          :on-exceed="handleExceed"
+                          :file-list="content.attachment">
+                        <el-button size="small" type="primary">Upload your files</el-button>
+                        <div slot="tip" class="el-upload__tip">Only 3 files, and not exceeding 500kb for each.</div>
+                      </el-upload>
                     </el-form-item>
                   </el-row>
+
                 </el-col>
               </el-row>
             </el-main>
@@ -121,9 +138,18 @@
 </template>
 
 <script>
+  /* eslint-disable */
   import axios from "axios";
   import Editor from '@/components/TextEditor'
   import utils from "../common/utils";
+
+  class Item {
+    constructor(fileName, fileId) {
+      this.name = fileName
+      this.url = fileId
+    }
+  }
+
   export default {
     name: 'AboutMeEditor',
     components: {
@@ -144,12 +170,21 @@
           },
           email:'',
           details:'',
-          attachment: '',
+          attachment: [],
         },
         //头像地址
         // fileList: [],
         imageUrl: '',
-
+        fileList:
+          [
+            // {
+            //   name: 'food.jpeg',
+            //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // },
+            // {name: 'food2.jpeg',
+            //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // }
+          ],
         rules:{
           name:[
             { required: false, message: 'Please enter your name', trigger: 'blur' }
@@ -171,7 +206,7 @@
       utils.readAboutMeContent(this.tabId).then(res => {
         const _this = this
         const content = JSON.parse(res.content);
-        console.log(content)
+        // console.log(content)
         //取得数据源
         const form = this.content
         const editor = this.$refs.detailsEditor
@@ -183,6 +218,7 @@
         utils.readImage(form.avatar).then(res => {
           //解析图像Blob数据
           _this.imageUrl = URL.createObjectURL(res)
+          console.log("image: "+_this.imageUrl)
         })
         //名字
         form.firstName = content.firstName
@@ -190,8 +226,11 @@
         form.links = content.links
         //邮箱
         form.email = content.email
-        //文件url
-        form.attachment = content.attachment
+        //文件
+        if(content.attachment != null && content.attachment != ''){
+          form.attachment = content.attachment
+          console.log("attach: ",content.attachment)
+        }
         //编辑器内容
         form.details = content.details
         editor.content = content.details
@@ -208,7 +247,7 @@
         const editor = this.$refs.detailsEditor
         //获取数据
         form.details = editor.content
-        console.log("send:"+JSON.stringify(_this.content))
+        // console.log("submitForm:", JSON.stringify(_this.content))
 
         return axios.post('/tab/'+_this.tabId, {title: _this.title, content: JSON.stringify(_this.content)}).then(res => {
           console.log(res)
@@ -219,20 +258,6 @@
       goHome(){
         this.$router.push("/Home");
       },
-
-      // handleRemove(file, fileList) {
-      //   console.log(file, fileList);
-      // },
-      // handlePreview(file) {
-      //   console.log(file);
-      // },
-      // handleExceed(files, fileList) {
-      //   this.$message.warning(`You have upload ${files.length + fileList.length} files`);
-      // },
-      // beforeRemove(file, fileList) {
-      //   console.log(fileList)
-      //   return this.$confirm(`Are you sure to remove ${ file.name }?`);
-      // },
 
       //头像上传
       handleAvatarSuccess(res, file) {
@@ -269,35 +294,63 @@
           })
         })
 
-        // new Promise(resolve => {
-        //   axios.post('/file', fd,
-        //     {
-        //       headers: {
-        //         'Content-Type': 'multipart/form-data',
-        //       }
-        //     }).then(res => {
-        //       // console.log(res.data)
-        //       _this.avatar = res.data.data.file_id
-        //       // _this.imageUrl = "http://8.210.28.169:8883/api/v1/file/"+res.data.data.file_id
-        //       resolve(res.data.data.file_id)
-        //   }).catch(error => {
-        //     console.log(error)
-        //   })
-        // }).then(() => {
-        //   axios.get('/file/'+_this.avatar, { responseType: 'blob'}).then(res => {
-        //     console.log(res)
-        //     _this.imageUrl = URL.createObjectURL(res.data)
-        //   })
-        // })
-
         return isJPG && isLt2M;
-      }
+      },
 
-
-
-      // changeParentContent(val){
-      //   console.log(val)
-      // }
+      //上传文件
+      handleRemove(file, fileList) {
+        console.log("handleRemove", file, fileList);
+        let arr = this.content.attachment
+        for(let i = 0; i < arr.length; i++){
+          if(arr[i].url === file.url){
+            console.log("find", arr[i])
+            arr.splice(i, 1)
+          }
+        }
+      },
+      handlePreview(file) {
+        console.log("handlePreview", this.content.attachment);
+        console.log("handlePreview", file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`Do not exceed 3 files. Now you are selecting ${files.length} files，you have selected ${files.length + fileList.length} files`);
+      },
+      beforeRemove(file, fileList) {
+        console.log("beforeRemove",fileList)
+        return this.$confirm(`Are your sure to remove ${ file.name } ?`);
+      },
+      beforeUploadFile(file){
+        console.log("beforeUploadFile",file)
+        const isLt500kb = file.size / 1024 < 500;
+        if (!isLt500kb) {
+          this.$message.error('The size of file should not exceed 500kb!')
+          return isLt500kb
+        }
+        return true
+      },
+      onUpload(data){
+        let _this = this
+        let file = data.file
+        let fd = new FormData()
+        let fileId = ''
+        fd.append('picture', file)
+        utils.createFile(fd).then(res => {
+          fileId = res
+          let item = new Item(file.name, fileId)
+          _this.content.attachment.push(item)
+          console.log("onUpload: ", res)
+          console.log("onUpload: ", _this.content.attachment)
+          // utils.readImage(res).then(res => {
+          //   //解析图像Blob数据
+          //   _this.imageUrl = URL.createObjectURL(res)
+          //   //头像文件名
+          //   _this.content.avatar = name;
+          // })
+        })
+      },
+      handleSuccess(res, file, fileList){
+        console.log("handleSuccess: ", fileList)
+      },
     }
   }
 

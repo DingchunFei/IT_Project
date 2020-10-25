@@ -59,7 +59,83 @@ export default {
   readImage: function (fileName) {
     return new Promise(resolve => {
       axios.get('/file/'+fileName, { responseType: 'blob'}).then(res => {
+        console.log("image",res)
         resolve(res.data)
+      })
+    })
+  },
+
+  readProfile: function () {
+    return new Promise(resolve => {
+      axios.get('/profile', {}).then(res => {
+        resolve(res.data)
+      })
+    })
+  },
+  updateProfile: function (profile) {
+    return new Promise(resolve => {
+      axios.post('/profile',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          fist_name: profile.firstName,
+          last_name: profile.lastName,
+          avatar: profile.avatar,
+          theme: profile.theme,
+        }).then(res => {
+        resolve(res.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    })
+  },
+
+  //读取文件
+  //输入String：文件名（无后缀）
+  //返回Blob：文件的blob格式数据
+  readFile: function (fileId) {
+    return new Promise(resolve => {
+      axios.get('/file/'+fileId, { responseType: 'blob'}).then(res => {
+        console.log("file", res)
+        resolve(res.data)
+      })
+    })
+  },
+
+  //添加文件
+  //输入FormData：文件
+  //返回String：文件名
+  createFile: function (file) {
+    return new Promise(resolve => {
+      axios.post('/file', file,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(res => {
+          console.log("createFile",res)
+        resolve(res.data.data.file_id)
+      }).catch(error => {
+        console.log(error)
+      })
+    })
+  },
+
+  //更新文件
+  //输入String，FormData：文件id，文件
+  //返回String：文件名
+  updateFile: function (fileId, file) {
+    return new Promise(resolve => {
+      axios.post('/file/'+fileId, file,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }).then(res => {
+        resolve(res.data.data.file_id)
+      }).catch(error => {
+        console.log(error)
       })
     })
   },
