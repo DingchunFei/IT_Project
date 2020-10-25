@@ -12,6 +12,7 @@ Vue.use(Vuex);
 
 import axios from 'axios'
 axios.defaults.baseURL="http://8.210.28.169:8885/api/v1";
+//axios.defaults.baseURL="/api";
 Vue.prototype.$http = axios
 
 import utils from "@/common/utils";
