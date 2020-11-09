@@ -29,5 +29,18 @@ npm run build
 npm run lint
 ```
 
+### Deployment with Docker
+Using docker container to depoly product
+
+### Build Docker image
+```
+docker build -t dockervue .
+```
+
+### Run Docker container
+```
+docker run -d --name vueui -p 8080:80 dockervue .
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
