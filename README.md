@@ -14,30 +14,31 @@ Users can also change the theme color of the website. Visitors can download the 
 npm install
 ```
 
-### Compiles and hot-reloads for development
+- Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+- Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+- Lints and fixes files
 ```
 npm run lint
 ```
 
+## Deployment
+
 ### Deployment with Docker
 Using docker container to depoly product
 
-### Build Docker image
++ Build Docker image
 ```
 docker build -t dockervue .
 ```
 
-### Run Docker container
++ Run Docker container
 ```
 docker run -d --name vueui -p 8080:80 dockervue .
 ```
